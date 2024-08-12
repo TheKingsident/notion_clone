@@ -93,7 +93,7 @@ function Sidebar() {
 						))}
 					</>
 				)}
-			</div>
+		
 			{/* List...*/}
 			
 			{/* Shared with me*/}
@@ -108,6 +108,7 @@ function Sidebar() {
 				</>
 			)}
 			{/* List...*/}
+			</div>
 		</>
 
 );

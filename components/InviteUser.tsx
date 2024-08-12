@@ -10,34 +10,37 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-import { useState, useTransition } from "react"
+import { FormEvent, useState, useTransition } from "react"
 import { Button } from "./ui/button"
 import { usePathname, useRouter } from "next/navigation"
-import { deleteDocument } from "@/actions/actions"
+import { deleteDocument, inviteUserToDocument } from "@/actions/actions"
 import { toast } from "sonner"
+import { Input } from "./ui/input"
 
   
 
 function InviteUser() {
     const [isOpen, setIsOpen] = useState(false)
     const [isPending, startTransition] = useTransition()
+    const [email, setEmail] = useState("")
     const pathname = usePathname()
     const router = useRouter()
 
 
-    const handleDelete = async () => {
+    const handleInvite  = async (e: FormEvent) => {
+      e.preventDefault();
         const roomId = pathname.split("/").pop()
         if (!roomId) return
 
         startTransition(async () => {
-            const { success } = await deleteDocument(roomId)
+            const { success } = await inviteUserToDocument(roomId, email)
 
             if (success) {
                 setIsOpen(false)
-                router.replace("/")
-                toast.success("Room/Document deleted successfully!")
+                setEmail("")
+                toast.success("User successfully added!")
             } else {
-                toast.error("Failed to delete!")
+                toast.error("Failed to add user!")
             }
         })
     }
@@ -55,21 +58,20 @@ function InviteUser() {
                 </DialogDescription>
             </DialogHeader>
 
-            <DialogFooter className="sm:jusitfy-end gap-2">
+            <form className="flex gap-2" onSubmit={handleInvite}>
+                <Input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
                 <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={handleDelete}
-                    disabled={isPending}
-                >
-                    {isPending ? "Deleting..." : "Delete"}
+                  type="submit"
+                  disabled={!email ||isPending}>
+                    {isPending ? "Inviting..." : "Invite"}
                 </Button>
-                <DialogClose asChild>
-                    <Button type="button" variant="secondary">
-                        Close
-                    </Button>
-                </DialogClose>
-            </DialogFooter>
+            </form>
         </DialogContent>
     </Dialog>
 
