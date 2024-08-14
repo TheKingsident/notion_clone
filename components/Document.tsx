@@ -66,7 +66,6 @@ function Document({ id }: { id: string }) {
 
           <Avatars />
 
-            {/* Avatars */}
         </div>
 
         <hr className="pb-10" />
