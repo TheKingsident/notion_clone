@@ -1,7 +1,7 @@
 
 # Notion Clone
 
-Welcome to the Notion Clone repository! This project is a fully functional clone of Notion, designed to showcase a modern web application built with cutting-edge technologies. The application supports real-time collaboration, authentication, document management, and more. The project is deployed on Vercel and is accessible [here](https://vercel.com/kingsley-usas-projects/notion-clone/B6UHsmpVpujxUmHE2NLXykfybACh).
+Welcome to the Notion Clone repository! This project is a fully functional clone of Notion, designed to showcase a modern web application built with cutting-edge technologies. The application supports real-time collaboration, authentication, document management, and more. The project is deployed on Vercel and is accessible [here](https://notion-clone-two-alpha.vercel.app/).
 
 ## Table of Contents
 
